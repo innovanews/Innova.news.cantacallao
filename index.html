@@ -1,0 +1,1079 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Innova News - Sede Canta Callao</title>
+    <meta name="description" content="Plataforma oficial del Comité Periodístico Innova News de Innova Schools - Sede Canta Callao. Ediciones mensuales, redacción, audiovisual y portal de equipo." />
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/G3yyhNz3/innova-news-logo-3-removebg-preview.png" />
+    
+    <!-- OpenGraph & Twitter Cards -->
+    <meta property="og:title" content="Innova News - Sede Canta Callao" />
+    <meta property="og:description" content="Plataforma oficial del Comité Periodístico Innova News de Innova Schools - Sede Canta Callao. Ediciones mensuales, redacción, audiovisual y portal de equipo." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Google Fonts: Plus Jakarta Sans & Newsreader -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Estilos Principales -->
+    <link rel="stylesheet" href="./src/index.css" />
+
+    <!-- Filtro de logs de backend para conexión a Firebase Firestore -->
+    <script>
+      (function() {
+        var origError = console.error;
+        console.error = function() {
+          for (var i = 0; i < arguments.length; i++) {
+            var arg = arguments[i];
+            if (arg) {
+              var str = typeof arg === "string" ? arg : (arg.message || "");
+              if (str.indexOf("@firebase/firestore") !== -1 || str.indexOf("Cloud Firestore API has not been used") !== -1) {
+                return;
+              }
+            }
+          }
+          origError.apply(console, arguments);
+        };
+      })();
+    </script>
+
+    <!-- Script de inicialización inmediata de tema (Modo Oscuro / Claro sin parpadeos) -->
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem("innova_news_theme");
+          var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+          var theme = saved || (prefersDark ? "dark" : "light");
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+
+    <!-- BARRA DE ANUNCIO SUPERIOR INSTITUCIONAL -->
+    <div class="top-notice-bar">
+      <span>COMUNICADO OFICIAL</span> Órgano Periodístico Escolar de Innova Schools • Sede Canta Callao • Año Académico 2026
+    </div>
+
+    <!-- NAVEGACIÓN PRINCIPAL -->
+    <header class="site-header">
+      <div class="container navbar">
+        <a href="#inicio" class="brand-wrapper" id="brand-link" title="Innova News - Sede Canta Callao">
+          <!-- Logo Oficial del Comité -->
+          <img src="logo-innova-news.png" alt="Innova News Logo" class="logo-site" onerror="this.style.display='none'; document.getElementById('brand-fallback-badge').style.display='flex';" />
+          <div class="brand-logo-badge" id="brand-fallback-badge" style="display: none;">IN</div>
+          <div class="brand-text">
+            <h1>INNOVA <span class="news-tag">NEWS</span></h1>
+            <p>SEDE CANTA CALLAO • COMITÉ OFICIAL</p>
+          </div>
+        </a>
+
+        <ul class="nav-links" id="nav-menu">
+          <li><a href="#inicio" class="nav-link active" data-nav="inicio">Inicio</a></li>
+          <li>
+            <a href="#ediciones" class="nav-link" data-nav="ediciones">
+              Ediciones <span class="nav-badge-pill">Octubre 2026</span>
+            </a>
+          </li>
+          <li><a href="#sobre-nosotros" class="nav-link" data-nav="sobre-nosotros">Sobre Nosotros</a></li>
+          <li><button type="button" class="nav-link nav-btn-link" id="btn-open-committee" title="Ver Directorio del Comité Periodístico">👥 Ver Comité</button></li>
+        </ul>
+
+        <div class="nav-actions">
+          <!-- INTERRUPTOR DE TEMA (MODO OSCURO / CLARO) -->
+          <button class="theme-toggle-btn" id="btn-theme-toggle" type="button" aria-label="Cambiar tema claro / oscuro" title="Cambiar a Modo Oscuro / Claro">
+            <span class="theme-icon" id="theme-icon">🌙</span>
+            <span class="theme-label" id="theme-label">Oscuro</span>
+          </button>
+
+          <div id="auth-nav-container">
+            <!-- Renderizado dinámico vía app.js: Botón de Acceso o Píldora de Perfil del Usuario -->
+            <button class="btn-primary" id="btn-open-auth">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+              Acceso Equipo
+            </button>
+          </div>
+
+          <button class="mobile-menu-btn" id="btn-toggle-menu" aria-label="Abrir menú de navegación">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- SECCIÓN HERO / PORTADA PRINCIPAL -->
+    <section class="hero-section" id="inicio">
+      <div class="container hero-grid">
+        <div class="hero-text-col">
+          <!-- Espacio reservado para Logo Oficial en Portada -->
+          <div class="hero-brand-emblem">
+            <img src="logo-innova-news.png" alt="Innova News Logo" class="hero-logo-img" onerror="this.style.display='none'" />
+          </div>
+
+          <div class="hero-tag">
+            <span class="pulse-dot"></span>
+            <span>Edición Central de Octubre 2026 en Circulación</span>
+          </div>
+          <h2 class="hero-title">
+            La voz, las ideas y el talento de <span class="highlight-green">Innova Schools</span> <span class="highlight-orange">Canta Callao</span>
+          </h2>
+          <p class="hero-description">
+            Innova News es una plataforma web oficial desarrollada por estudiantes y para estudiantes de Innova Schools Sede Canta Callao. Nuestro comité periodístico está dirigido actualmente por la profesora Patricia Ocaña, promoviendo la libre expresión, la investigación y el talento audiovisual escolar.
+          </p>
+          <div class="hero-cta-group">
+            <a href="#ediciones" class="btn-primary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+              Explorar Ediciones 2026
+            </a>
+            <a href="#sobre-nosotros" class="btn-outline-sky">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              Conoce al Equipo
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-spotlight-col">
+          <div class="hero-spotlight-card" id="hero-spotlight-container">
+            <!-- Rellenado dinámicamente con el artículo central o estado de bienvenida autónomo -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN EDICIONES Y CONTENIDOS (AGOSTO, SEPTIEMBRE, OCTUBRE) -->
+    <section class="ediciones-section" id="ediciones">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">Hemeroteca Escolar Digital</span>
+          <h2 class="section-title">Ediciones del Comité 2026</h2>
+          <p class="section-subtitle">
+            Selecciona el mes que deseas consultar y navega entre los artículos redactados estilo Word o los reportajes y diseños audiovisuales interactivos.
+          </p>
+        </div>
+
+        <!-- Selector de Meses -->
+        <div class="month-selector-bar" id="month-tabs-container">
+          <button class="month-tab-btn" data-month="Agosto">
+            <span>📅 Agosto 2026</span>
+          </button>
+          <button class="month-tab-btn" data-month="Septiembre">
+            <span>📅 Septiembre 2026</span>
+          </button>
+          <button class="month-tab-btn active" data-month="Octubre">
+            <span>📅 Octubre 2026</span>
+            <span class="badge-current">Mes Actual ★</span>
+          </button>
+        </div>
+
+        <!-- Selector de Categoría (Redacción / Audiovisual) -->
+        <div class="category-filter-bar">
+          <div class="category-switch">
+            <button class="category-btn active" id="btn-cat-redaccion" data-category="redaccion">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              Redacción Periodística (Word .docx)
+            </button>
+            <button class="category-btn" id="btn-cat-audiovisual" data-category="audiovisual">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+              Audiovisual & Diseños Canva
+            </button>
+          </div>
+        </div>
+
+        <!-- Contenedor Dinámico de Tarjetas -->
+        <div class="content-grid" id="content-cards-container">
+          <!-- Renderizado dinámicamente con JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN SOBRE NOSOTROS Y COMITÉS (FOTOS DINÁMICAS ACTUALIZABLES POR SUPERADMIN) -->
+    <section class="about-section" id="sobre-nosotros">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">Nuestra Comunidad y Vocación</span>
+          <h2 class="section-title">Sobre Innova News</h2>
+          <p class="section-subtitle">
+            Conoce a los equipos estudiantiles que lideran la cobertura informativa, el análisis de opinión y la creatividad multimedia en Innova Schools Sede Canta Callao.
+          </p>
+        </div>
+
+        <div class="about-intro-box">
+          <h3>Misión Periodística y Formativa</h3>
+          <p>
+            Innova News nació en la sede Canta Callao como un espacio formativo e independiente de expresión estudiantil, fundamentado en la búsqueda rigurosa de la verdad, el desarrollo del pensamiento crítico, la alfabetización mediática y la celebración del talento de nuestra comunidad escolar.
+          </p>
+          <div class="values-chips">
+            <span class="value-chip">✓ Veracidad y Verificación</span>
+            <span class="value-chip">✓ Creatividad Multimedia</span>
+            <span class="value-chip">✓ Ética Escolar</span>
+            <span class="value-chip">✓ Trabajo Colaborativo</span>
+            <span class="value-chip">✓ Orgullo Canta Callao</span>
+          </div>
+        </div>
+
+        <div class="committees-grid">
+          <!-- Tarjeta 1: Comité de Redacción -->
+          <div class="committee-card">
+            <div class="committee-photo-placeholder">
+              <img id="about-photo-redaccion" src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=700&q=80" alt="Comité de Redacción Innova News" />
+              <span class="committee-tag-overlay">Redacción Escrita</span>
+            </div>
+            <div class="committee-body">
+              <h3 class="committee-title">Comité de Redacción</h3>
+              <p class="committee-desc">
+                Encargados de redactar crónicas, entrevistas en profundidad, reportajes de investigación escolar y notas de opinión con estructura periodística formal.
+              </p>
+              <ul class="committee-roles-list">
+                <li><span class="role-bullet">●</span> Redacción de Crónicas y Reportajes</li>
+                <li><span class="role-bullet">●</span> Revisión de Estilo y Corrección Ortográfica</li>
+                <li><span class="role-bullet">●</span> Exportación y Maquetación en Microsoft Word</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Tarjeta 2: Comité Audiovisual -->
+          <div class="committee-card">
+            <div class="committee-photo-placeholder">
+              <img id="about-photo-audiovisual" src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=700&q=80" alt="Comité Audiovisual Innova News" />
+              <span class="committee-tag-overlay">Producción & Canva</span>
+            </div>
+            <div class="committee-body">
+              <h3 class="committee-title">Comité Audiovisual</h3>
+              <p class="committee-desc">
+                Responsables de la captura en video de los eventos institucionales, producción de reels informativos, locución y diseño de infografías interactivas en Canva.
+              </p>
+              <ul class="committee-roles-list">
+                <li><span class="role-bullet">●</span> Grabación de Cápsulas y Entrevistas</li>
+                <li><span class="role-bullet">●</span> Edición de Video, Efectos y Sonido</li>
+                <li><span class="role-bullet">●</span> Diseños Infográficos e Interactivos en Canva</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Tarjeta 3: Equipo Completo y Dirección -->
+          <div class="committee-card">
+            <div class="committee-photo-placeholder">
+              <img id="about-photo-equipo" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=700&q=80" alt="Equipo Completo Innova News Canta Callao" />
+              <span class="committee-tag-overlay">Comunidad y Dirección</span>
+            </div>
+            <div class="committee-body">
+              <h3 class="committee-title">Equipo General y Dirección</h3>
+              <p class="committee-desc">
+                Articulación entre redactores, camarógrafos, diseñadores gráficos y la Dirección Periodística Central con supervisión institucional.
+              </p>
+              <ul class="committee-roles-list">
+                <li><span class="role-bullet">●</span> Coordinación de Pautas Editoriales</li>
+                <li><span class="role-bullet">●</span> Aprobación Centralizada de Ingresantes</li>
+                <li><span class="role-bullet">●</span> Supervisión Institucional Sede Canta Callao</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PIE DE PÁGINA Y DISCLAIMER OFICIAL OBLIGATORIO -->
+    <footer class="site-footer">
+      <div class="container">
+        
+        <!-- DISCLAIMER EXPLICITO REQUERIDO -->
+        <div class="footer-disclaimer-box">
+          <h4>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            Aviso Oficial y Deslinde de Responsabilidad
+          </h4>
+          <p>
+            Esta plataforma web es el órgano informativo oficial y exclusivo del Comité Periodístico Estudiantil <strong>"Innova News"</strong> de Innova Schools, sede <strong>Canta Callao</strong>. Los artículos redactados, opiniones expresadas, infografías y reportajes audiovisuales aquí alojados corresponden única y estrictamente a la labor formativa de los estudiantes de dicha sede y deslindan toda responsabilidad legal o editorial sobre otras sedes de la red Innova Schools o contenidos ajenos a este comité periodístico escolar.
+          </p>
+        </div>
+
+        <div class="footer-main-grid">
+          <div class="footer-col">
+            <h5>Innova News</h5>
+            <p>
+              Periodismo escolar comprometido con la verdad, el liderazgo estudiantil y la innovación pedagógica en el Callao.
+            </p>
+            <p style="color: var(--sky-400); font-weight: 600;">
+              Sede Canta Callao • Provincia Constitucional del Callao, Perú.
+            </p>
+          </div>
+
+          <div class="footer-col">
+            <h5>Ediciones 2026</h5>
+            <ul class="footer-links-list">
+              <li><a href="#ediciones" onclick="window.innovaApp.selectMonth('Octubre')">Edición Octubre 2026 (Actual)</a></li>
+              <li><a href="#ediciones" onclick="window.innovaApp.selectMonth('Septiembre')">Edición Septiembre 2026</a></li>
+              <li><a href="#ediciones" onclick="window.innovaApp.selectMonth('Agosto')">Edición Agosto 2026</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h5>Comités</h5>
+            <ul class="footer-links-list">
+              <li><a href="#sobre-nosotros">Comité de Redacción</a></li>
+              <li><a href="#sobre-nosotros">Comité Audiovisual</a></li>
+              <li><a href="#sobre-nosotros">Dirección Editorial</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h5>Contacto Institucional</h5>
+            <p>Para convocatorias, notas de prensa y coordinación de Dirección Periodística:</p>
+            <div style="display: flex; flex-direction: column; gap: 0.45rem; margin-top: 0.5rem;">
+              <a href="mailto:62754739@alumnos.innovaschools.edu.pe" style="color: var(--orange-accent); font-weight: 700; word-break: break-all; text-decoration: none; display: flex; align-items: center; gap: 0.4rem;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink: 0;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <span>62754739@alumnos.innovaschools.edu.pe</span>
+              </a>
+              <a href="mailto:76119235@alumnos.innovaschools.edu.pe" style="color: var(--orange-accent); font-weight: 700; word-break: break-all; text-decoration: none; display: flex; align-items: center; gap: 0.4rem;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink: 0;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <span>76119235@alumnos.innovaschools.edu.pe</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom-bar">
+          <div>© 2026 Comité Periodístico Innova News - Innova Schools Canta Callao. Todos los derechos reservados.</div>
+          <div>Diseñado para excelencia educativa y periodismo escolar riguroso.</div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- =====================================================================
+         MODALES INTERACTIVOS
+         ===================================================================== -->
+
+    <!-- 1. MODAL VISOR DE DOCUMENTO WORD (.DOCX) -->
+    <div class="modal-backdrop" id="word-viewer-modal">
+      <div class="word-viewer-window">
+        <!-- Cinta Azul de Microsoft Word -->
+        <div class="word-ribbon-header">
+          <div class="word-brand-title">
+            <span class="word-icon-badge">W</span>
+            <span>Microsoft Word Reader</span>
+            <span class="word-doc-name" id="word-viewer-filename">Articulo_InnovaNews.docx</span>
+          </div>
+          <div class="word-ribbon-actions">
+            <button class="btn-download-word" id="btn-modal-download-word" title="Descargar documento editable para Microsoft Word">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Descargar Word Original (.doc)
+            </button>
+            <button id="btn-close-word-modal" style="color: #ffffff; padding: 0.3rem; margin-left: 0.5rem;" title="Cerrar visor">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Subbarra de pestañas Word -->
+        <div class="word-subtoolbar">
+          <div class="word-tab-strip">
+            <span class="active">Inicio</span>
+            <span>Diseño de página</span>
+            <span>Referencias</span>
+            <span>Vista</span>
+          </div>
+          <div id="word-reading-time">Tiempo de lectura estimado: 3 min</div>
+        </div>
+
+        <!-- Hoja A4 simulada con texto y maquetación -->
+        <div class="word-page-container">
+          <article class="word-page-sheet" id="word-page-content">
+            <div class="word-sheet-header-line">
+              <span>INNOVA NEWS • COMITÉ DE REDACCIÓN CANTA CALLAO</span>
+              <span id="word-article-date">Octubre 2026</span>
+            </div>
+            <h1 class="word-sheet-title" id="word-article-title">Título del Artículo</h1>
+            <div class="word-sheet-byline" id="word-article-byline">
+              <span>Por: Redacción Innova News</span>
+            </div>
+            <div class="word-sheet-content" id="word-article-body">
+              <!-- Contenido inyectado dinámicamente -->
+            </div>
+          </article>
+        </div>
+
+        <!-- Barra inferior de estado Word -->
+        <div class="word-status-bar">
+          <div>Página 1 de 1 &nbsp;|&nbsp; <span id="word-count-display">0 palabras</span> &nbsp;|&nbsp; Idioma: Español (Perú)</div>
+          <div>Modo de Lectura &nbsp; 100%</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. MODAL REPRODUCTOR AUDIOVISUAL & CANVA -->
+    <div class="modal-backdrop" id="media-viewer-modal">
+      <div class="word-viewer-window" style="border-color: var(--green-600); max-width: 900px;">
+        <div class="word-ribbon-header" style="background: linear-gradient(90deg, #0f172a 0%, var(--green-800) 100%);">
+          <div class="word-brand-title">
+            <span class="word-icon-badge" style="background: var(--green-500); color: #ffffff;">▶</span>
+            <span id="media-modal-header-title">Reproductor Audiovisual Innova News</span>
+          </div>
+          <button id="btn-close-media-modal" style="color: #ffffff; padding: 0.3rem;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+
+        <div style="padding: 1.5rem; overflow-y: auto; background: #ffffff;">
+          <div id="media-modal-player-box" style="width: 100%; aspect-ratio: 16/9; background: #000000; border-radius: var(--radius-md); overflow: hidden; margin-bottom: 1.5rem;">
+            <!-- Player embebido -->
+          </div>
+
+          <h3 id="media-modal-title" style="font-size: 1.4rem; margin-bottom: 0.75rem;">Título del Reportaje</h3>
+          <p id="media-modal-desc" style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; line-height: 1.6;">Descripción completa.</p>
+
+          <div class="media-credits-box" id="media-modal-credits">
+            <!-- Créditos detallados inyectados -->
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; gap: 1rem; margin-top: 1.5rem;">
+            <a href="#" target="_blank" id="btn-media-external-link" class="btn-primary" style="background-color: var(--orange-accent);">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Abrir Enlace / Fuente Original
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL VISOR DE DOCUMENTO PDF -->
+    <div class="modal-backdrop" id="pdf-viewer-modal">
+      <div class="pdf-viewer-window">
+        <div class="pdf-ribbon-header">
+          <div class="pdf-brand-title">
+            <span class="pdf-icon-badge">PDF</span>
+            <span id="pdf-viewer-filename">Documento_InnovaNews.pdf</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <a href="#" target="_blank" download id="btn-modal-download-pdf" class="btn-download-pdf" style="background: #ffffff; color: #dc2626; border: none; padding: 0.35rem 0.75rem; font-size: 0.8rem;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              📥 Descargar PDF
+            </a>
+            <button id="btn-close-pdf-modal" style="color: #ffffff; padding: 0.3rem;" title="Cerrar visor PDF">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div style="padding: 0.75rem 1.25rem; background: var(--bg-card); border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <h4 id="pdf-modal-title" style="font-size: 1.05rem; color: var(--text-dark);">Título de la Publicación</h4>
+            <div id="pdf-modal-author" style="font-size: 0.8rem; color: var(--text-muted);">Por: Autor • Octubre 2026</div>
+          </div>
+        </div>
+
+        <div class="pdf-embed-container">
+          <iframe id="pdf-modal-iframe" src="" allowfullscreen title="Visor de Documento PDF"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL DE PERFIL PÚBLICO DE USUARIO (RED SOCIAL ESCOLAR) -->
+    <div class="modal-backdrop" id="public-profile-modal">
+      <div class="public-profile-card">
+        <!-- Banner superior con botón de cerrar -->
+        <div class="public-profile-banner" id="pub-profile-banner">
+          <button class="btn-close-public-profile" id="btn-close-public-profile-modal" title="Cerrar perfil">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+
+        <!-- Encabezado del perfil con avatar flotante y datos -->
+        <div class="public-profile-header">
+          <div class="public-profile-avatar-wrap">
+            <img src="https://i.postimg.cc/BZrDdSSJ/imagen-2026-10-30-073218985.png" alt="Avatar" id="pub-profile-avatar" class="public-profile-avatar" />
+            <div id="pub-profile-actions">
+              <!-- Botón Editar Perfil si el usuario es el dueño -->
+            </div>
+          </div>
+
+          <h2 class="public-profile-name" id="pub-profile-name">Nombre del Autor</h2>
+          <div class="public-profile-meta">
+            <span id="pub-profile-role" style="font-weight: 700; color: var(--sky-700);">Rol / Cargo</span>
+            <span>•</span>
+            <span id="pub-profile-grade" style="color: var(--text-muted);">Grado</span>
+            <span id="pub-profile-badge"></span>
+          </div>
+          <div id="pub-profile-email" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">correo@alumnos.innovaschools.edu.pe</div>
+
+          <!-- Biografía pública del autor -->
+          <div class="public-profile-bio-box">
+            <div style="font-size: 0.78rem; font-weight: 800; color: var(--sky-800); margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.35rem;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+              Biografía & Reseña Personal:
+            </div>
+            <p id="pub-profile-bio" style="margin: 0; color: var(--text-dark); font-size: 0.9rem;">
+              Cargando biografía...
+            </p>
+          </div>
+        </div>
+
+        <!-- Lista en tiempo real de todos sus trabajos/artículos publicados -->
+        <div class="public-profile-body">
+          <div class="public-profile-works-title">
+            <h4 style="color: var(--text-dark); font-size: 1.15rem; font-weight: 800; display: flex; align-items: center; gap: 0.45rem;">
+              <span>📚 Publicaciones y Portafolio del Autor</span>
+            </h4>
+            <span class="nav-badge-pill" id="pub-profile-works-count">0 publicaciones</span>
+          </div>
+
+          <div id="pub-profile-works-container" style="display: flex; flex-direction: column; gap: 1rem;">
+            <!-- Trabajos inyectados dinámicamente -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. MODAL DE AUTENTICACIÓN Y REGISTRO (CON SCROLL INTERNO Y DOBLE CONTRASEÑA) -->
+    <div class="modal-backdrop" id="auth-modal">
+      <div class="auth-modal-card">
+        <div class="auth-header">
+          <button id="btn-close-auth-modal" style="position: absolute; top: 1.25rem; right: 1.25rem; color: #ffffff;" aria-label="Cerrar ventana">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+          <h3>Portal del Equipo Periodístico</h3>
+          <p>Innova Schools • Sede Canta Callao</p>
+        </div>
+
+        <div class="auth-tabs-nav">
+          <button class="auth-tab-btn active" id="auth-tab-login">Iniciar Sesión</button>
+          <button class="auth-tab-btn" id="auth-tab-register">Crear Cuenta</button>
+        </div>
+
+        <div class="auth-body">
+          <div id="auth-alert-box"></div>
+
+          <!-- FORMULARIO 1: INICIAR SESIÓN -->
+          <form id="form-login" style="display: block;">
+            <div class="form-group">
+              <label class="form-label" for="login-email">Correo Institucional <span class="required">*</span></label>
+              <input type="email" id="login-email" class="form-input" placeholder="ejemplo@alumnos.innovaschools.edu.pe" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="login-password">Contraseña Personal <span class="required">*</span></label>
+              <input type="password" id="login-password" class="form-input" placeholder="Tu contraseña personal de perfil" required />
+            </div>
+
+            <div class="checkbox-remember-container">
+              <label class="checkbox-remember-label" for="login-remember">
+                <input type="checkbox" id="login-remember" name="remember" />
+                <span>Recordarme</span>
+              </label>
+              <span class="remember-subtext">Mantener sesión iniciada</span>
+            </div>
+
+            <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 0.5rem;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+              Ingresar al Portal
+            </button>
+
+            <div style="margin-top: 1.5rem; text-align: center; font-size: 0.82rem; color: var(--text-muted);">
+              ¿Perteneces al equipo oficial y aún no tienes cuenta? <a href="#" id="link-switch-register" style="color: var(--sky-700); font-weight: 700;">Crear Cuenta</a>
+            </div>
+          </form>
+
+          <!-- FORMULARIO 2: REGISTRO CON DOBLE CONTRASEÑA (AJAX PURO A WEB3FORMS / FIRESTORE) -->
+          <form id="form-register" action="https://api.web3forms.com/submit" method="POST" style="display: none;">
+            <input type="hidden" name="access_key" value="a2f6a5f0-4842-4f76-84a0-09a32e116ecf" />
+            <input type="hidden" name="from_name" value="Innova News - Canta Callao" />
+            <input type="hidden" name="subject" value="SOLICITUD DE ACCESO: Nuevo miembro para Innova News (Sede Canta Callao)" />
+            <input type="hidden" name="sede" value="Innova Schools - Sede Canta Callao (Año 2026)" />
+            <div class="form-group">
+              <label class="form-label" for="reg-name">Nombres y Apellidos Completos <span class="required">*</span></label>
+              <input type="text" id="reg-name" name="nombre_completo" data-fs-field class="form-input" placeholder="Ej. Camila Sofía Morales" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="reg-email">Correo Institucional Innova <span class="required">*</span></label>
+              <input type="email" id="reg-email" name="email" data-fs-field class="form-input" placeholder="usuario@alumnos.innovaschools.edu.pe" required />
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem;">
+              <div class="form-group">
+                <label class="form-label" for="reg-grade">Grado Escolar <span class="required">*</span></label>
+                <select id="reg-grade" name="grado" data-fs-field class="form-select" required>
+                  <option value="">Seleccionar grado</option>
+                  <option value="3ro Secundaria">3ro de Secundaria</option>
+                  <option value="4to Secundaria">4to de Secundaria</option>
+                  <option value="5to Secundaria">5to de Secundaria</option>
+                  <option value="Docente Coordinador">Docente Coordinador</option>
+                </select>
+              </div>
+
+              <!-- RESTRICCIÓN: ÚNICA Y EXCLUSIVAMENTE DOS COMITÉS -->
+              <div class="form-group">
+                <label class="form-label" for="reg-role">Comité Oficial <span class="required">*</span></label>
+                <select id="reg-role" name="comite" data-fs-field class="form-select" required>
+                  <option value="">Seleccionar área</option>
+                  <option value="Comité de Redacción">Comité de Redacción</option>
+                  <option value="Comité Audiovisual">Comité Audiovisual</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- CAMPO DE SEGURIDAD 1: LLAVE SECRETA DEL COMITÉ (Validada estrictamente en JS) -->
+            <div class="form-group" style="background: var(--sky-50); padding: 0.85rem; border-radius: var(--radius-md); border: 1.5px solid var(--sky-300);">
+              <label class="form-label" for="reg-committee-key" style="color: var(--sky-900);">
+                1. Llave de Autorización del Comité Periodístico <span class="required">*</span>
+              </label>
+              <div class="security-key-input-wrapper">
+                <input type="password" id="reg-committee-key" name="llave_comite" class="form-input" placeholder="Ingresa la llave confidencial del comité" autocomplete="off" required />
+                <span class="security-badge-icon" title="Protocolo de Seguridad Innova News">🔒</span>
+              </div>
+              <p class="form-help-text" style="color: var(--sky-800);">
+                Clave institucional estricta proporcionada por la Dirección de Innova News. Si no coincide de forma exacta, la postulación será rechazada.
+              </p>
+            </div>
+
+            <!-- CAMPO DE SEGURIDAD 2: CONTRASEÑA PERSONAL DE PERFIL -->
+            <div class="form-group">
+              <label class="form-label" for="reg-personal-password">2. Contraseña de Perfil Propia <span class="required">*</span></label>
+              <input type="password" id="reg-personal-password" name="password_personal" class="form-input" placeholder="Define tu clave personal para futuros inicios de sesión" required minlength="6" />
+              <p class="form-help-text">Mínimo 6 caracteres. Será tu clave personal única una vez que tu cuenta sea aprobada.</p>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="reg-password-confirm">Confirmar Contraseña Personal <span class="required">*</span></label>
+              <input type="password" id="reg-password-confirm" class="form-input" placeholder="Repite tu clave personal" required />
+            </div>
+
+            <div class="alert-box alert-warning" style="font-size: 0.78rem;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <span><strong>Solicitud de Acceso:</strong> Al completar tu registro con la llave confidencial del comité, tus datos se guardarán como pendientes de aprobación y se enviará la notificación a los administradores para admitir tu cuenta.</span>
+            </div>
+
+            <button type="submit" id="btn-submit-register" data-fs-submit-btn class="btn-primary" style="width: 100%; justify-content: center; margin-bottom: 1rem;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+              <span>Enviar Solicitud al Comité</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. MODAL DEL PANEL DE ADMINISTRACIÓN Y DASHBOARD (CON GESTIÓN DE FOTOS SOBRE NOSOTROS) -->
+    <div class="modal-backdrop" id="dashboard-modal">
+      <div class="dashboard-modal-card">
+        <div class="dashboard-header">
+          <div class="dashboard-title-group">
+            <h3>Panel de Redacción y Gestión Editorial</h3>
+            <p id="dash-user-sub">Comité Periodístico • Innova Schools Sede Canta Callao</p>
+          </div>
+          <button id="btn-close-dashboard-modal" style="color: #ffffff; padding: 0.35rem;" aria-label="Cerrar panel">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+
+        <div class="dashboard-tabs-strip">
+          <button class="dash-tab-btn active" id="tab-publish">✍️ Publicar Nuevo Contenido</button>
+          <button class="dash-tab-btn" id="tab-profile">👤 Mi Perfil y Portafolio</button>
+          <button class="dash-tab-btn superadmin-tab" id="tab-superadmin" style="display: none;">
+            👑 Super Administrador (<span id="pending-counter-badge">0</span>)
+          </button>
+        </div>
+
+        <div class="dashboard-body">
+          <div id="dash-alert-container"></div>
+
+          <!-- TAB 1: FORMULARIO DE PUBLICACIÓN DE CONTENIDO -->
+          <div id="view-publish" style="display: block;">
+            <form id="form-publish-article">
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+                <div class="form-group">
+                  <label class="form-label" for="pub-month">Edición Mensual <span class="required">*</span></label>
+                  <select id="pub-month" class="form-select" required>
+                    <option value="Octubre">Octubre 2026 (Mes Actual)</option>
+                    <option value="Septiembre">Septiembre 2026</option>
+                    <option value="Agosto">Agosto 2026</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="pub-category">Categoría de Publicación <span class="required">*</span></label>
+                  <select id="pub-category" class="form-select" required>
+                    <option value="redaccion">Redacción (Artículo escrito / Formato Word)</option>
+                    <option value="audiovisual">Audiovisual (Video o Diseño Canva)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="pub-title">Título de la Publicación <span class="required">*</span></label>
+                <input type="text" id="pub-title" class="form-input" placeholder="Ej. Debate Escolar 2026: Logros y Perspectivas en Canta Callao" required />
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 1.25rem;">
+                <div class="form-group">
+                  <label class="form-label" for="pub-authors">Autores / Realizadores de la Nota <span class="required">*</span></label>
+                  <input type="text" id="pub-authors" class="form-input" placeholder="Ej. Camila Morales, Diego Vargas (Comité de Redacción)" required />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="pub-date">Fecha de Emisión <span class="required">*</span></label>
+                  <input type="date" id="pub-date" class="form-input" required />
+                </div>
+              </div>
+
+              <!-- SELECTOR DE COAUTORES Y COLABORADORES CONECTADO A FIRESTORE USERS (ESTADO ADMITIDO) -->
+              <div class="form-group" style="background: var(--bg-subtle); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-bottom: 1.25rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem;">
+                  <label class="form-label" style="margin-bottom: 0; display: flex; align-items: center; gap: 0.4rem; color: var(--sky-900); font-weight: 700;">
+                    <span>👥</span> Etiquetar Coautores / Colaboradores del Comité
+                  </label>
+                  <span style="font-size: 0.75rem; color: var(--green-700); font-weight: 700; background: var(--green-50); padding: 0.2rem 0.55rem; border-radius: var(--radius-full); border: 1px solid var(--green-200);">
+                    ✓ Miembros ADMITIDOS en tiempo real
+                  </span>
+                </div>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0 0 0.65rem 0;">
+                  Marca los compañeros del comité que colaboraron en esta investigación o producción. Sus nombres aparecerán en la publicación con enlaces interactivos directos a sus perfiles públicos.
+                </p>
+                <div id="pub-coauthors-container" class="coauthors-selector-box">
+                  <!-- Rellenado dinámico con lista de usuarios admitidos de Firestore -->
+                  <div style="grid-column: 1 / -1; font-size: 0.82rem; color: var(--text-muted); text-align: center; padding: 0.5rem;">
+                    Cargando miembros admitidos...
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="pub-excerpt">Resumen Breve (Para tarjeta de portada) <span class="required">*</span></label>
+                <textarea id="pub-excerpt" class="form-textarea" rows="2" placeholder="Resumen informativo de 2 líneas sobre el artículo o reportaje..." required></textarea>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="pub-cover-url">URL de Imagen de Portada / Miniatura</label>
+                <input type="url" id="pub-cover-url" class="form-input" placeholder="https://images.unsplash.com/... (opcional, se asignará una por defecto si está vacío)" />
+              </div>
+
+              <!-- CAMPOS CONDICIONALES PARA REDACCIÓN -->
+              <div id="fields-redaccion" style="display: block;">
+                <div class="form-group">
+                  <label class="form-label" for="pub-content">
+                    Texto Completo del Artículo (Simulación Word .docx) <span class="required">*</span>
+                  </label>
+                  <textarea id="pub-content" class="form-textarea" rows="8" placeholder="Escribe aquí el contenido extenso del artículo. Puedes separar párrafos y añadir subtítulos. Este texto se compilará en el visor de Microsoft Word y estará disponible para descarga .doc..."></textarea>
+                </div>
+              </div>
+
+              <!-- CAMPOS CONDICIONALES PARA AUDIOVISUAL / CANVA -->
+              <div id="fields-audiovisual" style="display: none; background: var(--green-50); padding: 1.25rem; border-radius: var(--radius-md); border: 1.5px solid var(--green-200); margin-bottom: 1.2rem;">
+                <div class="form-group">
+                  <label class="form-label" for="pub-media-type">Tipo de Elemento Multimedia <span class="required">*</span></label>
+                  <select id="pub-media-type" class="form-select">
+                    <option value="youtube">Video de YouTube (URL estándar o corta)</option>
+                    <option value="canva">Diseño / Infografía Interactiva de Canva (Código Embed o Enlace)</option>
+                    <option value="direct">Video Directo en la Red (MP4 / WebM / Drive)</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="pub-media-url">Enlace del Video o Código Iframe de Canva <span class="required">*</span></label>
+                  <input type="text" id="pub-media-url" class="form-input" placeholder="https://www.youtube.com/watch?v=... o <iframe src='https://www.canva.com/...'></iframe>" />
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                  <div class="form-group">
+                    <label class="form-label" for="pub-credit-director">Dirección y Guión</label>
+                    <input type="text" id="pub-credit-director" class="form-input" placeholder="Ej. Camila Morales" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="pub-credit-camera">Cámara y Edición</label>
+                    <input type="text" id="pub-credit-camera" class="form-input" placeholder="Ej. Mateo Ramos" />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="pub-credit-others">Colaboradores / Entrevistados</label>
+                  <input type="text" id="pub-credit-others" class="form-input" placeholder="Ej. Alumnos de 4to B, Prof. Carlos Mendoza" />
+                </div>
+              </div>
+
+              <!-- ADJUNTOS OPCIONALES DE WORD Y PDF -->
+              <div class="form-attachment-section" style="background: var(--sky-50); padding: 1.15rem; border-radius: var(--radius-md); border: 1.5px solid var(--sky-200); margin: 1.25rem 0;">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.4rem;">
+                  <span style="font-size: 1.2rem;">📎</span>
+                  <strong style="color: var(--sky-900); font-size: 0.95rem;">Documentos Adjuntos Opcionales (Word y PDF)</strong>
+                </div>
+                <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.85rem;">
+                  Añade enlaces directos o compartidos a tus documentos para habilitar botones de descarga directa (.docx) o el visor integrado de lectura (.pdf):
+                </p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                  <div class="form-group" style="margin-bottom: 0;">
+                    <label class="form-label" for="pub-word-url" style="color: #1d4ed8; font-weight: 700;">
+                      📥 Enlace a Documento Word (.docx / .doc)
+                    </label>
+                    <input type="url" id="pub-word-url" class="form-input" placeholder="https://...documento.docx o enlace de descarga" />
+                    <p class="form-help-text">Genera un botón de descarga directa en la nota.</p>
+                  </div>
+                  <div class="form-group" style="margin-bottom: 0;">
+                    <label class="form-label" for="pub-pdf-url" style="color: #dc2626; font-weight: 700;">
+                      📄 Enlace a Documento PDF (.pdf)
+                    </label>
+                    <input type="url" id="pub-pdf-url" class="form-input" placeholder="https://...archivo.pdf o Google Drive" />
+                    <p class="form-help-text">Habilita visor integrado iframe y botón de descarga.</p>
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit" class="btn-primary" style="margin-top: 1rem; width: 100%; justify-content: center;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                Publicar en Innova News
+              </button>
+            </form>
+          </div>
+
+          <!-- TAB 2: PERFIL DE AUTOR PERSONALIZADO Y PORTAFOLIO -->
+          <div id="view-profile" style="display: none;">
+            <!-- Contenedor para alerta de cuenta en revisión o insignia de Admitido -->
+            <div id="profile-admitted-notice-container"></div>
+
+            <div class="profile-banner-view" id="profile-banner-display" style="background-image: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80');">
+              <img src="https://i.postimg.cc/BZrDdSSJ/imagen-2026-10-30-073218985.png" alt="Avatar" id="profile-avatar-display" class="profile-avatar-floating" />
+            </div>
+
+            <div class="profile-user-headline">
+              <h2 id="profile-display-name" style="font-size: 1.6rem; margin-bottom: 0.2rem;">Nombre del Autor</h2>
+              <p id="profile-display-role" style="color: var(--green-700); font-weight: 700; font-size: 0.95rem;">Rol en Innova News</p>
+              <p id="profile-display-email" style="color: var(--text-muted); font-size: 0.85rem;">correo@alumnos.innovaschools.edu.pe</p>
+              <div id="profile-display-bio-wrap" style="margin-top: 0.75rem; padding: 0.65rem 1rem; background: var(--bg-subtle); border-radius: var(--radius-sm); border-left: 3px solid var(--sky-500); display: none;">
+                <p id="profile-display-bio" style="font-size: 0.88rem; color: var(--text-dark); margin: 0; line-height: 1.5;"></p>
+              </div>
+            </div>
+
+            <div style="margin-top: 2rem; border-top: 1px solid var(--border-color); padding-top: 1.5rem;">
+              <h4 style="margin-bottom: 1rem; color: var(--sky-800);">Configuración de tu Perfil Público</h4>
+              
+              <form id="form-update-profile">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+                  <div class="form-group">
+                    <label class="form-label" for="edit-profile-name">Nombre Completo</label>
+                    <input type="text" id="edit-profile-name" class="form-input" required />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="edit-profile-role">Cargo / Funciones en el Comité</label>
+                    <input type="text" id="edit-profile-role" class="form-input" required />
+                  </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+                  <div class="form-group">
+                    <label class="form-label" for="edit-profile-avatar">URL de Foto de Perfil (Avatar)</label>
+                    <input type="url" id="edit-profile-avatar" class="form-input" placeholder="https://..." />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="edit-profile-banner">URL de Cabecera / Banner</label>
+                    <input type="url" id="edit-profile-banner" class="form-input" placeholder="https://..." />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="edit-profile-bio">Biografía / Presentación Personal (Red Social)</label>
+                  <textarea id="edit-profile-bio" class="form-textarea" rows="3" placeholder="Escribe una breve reseña sobre ti, tus intereses periodísticos, logros o roles escolares..."></textarea>
+                  <p class="form-help-text">Aparecerá en tu modal de perfil público cuando otros alumnos o docentes hagan clic en tu nombre o avatar.</p>
+                </div>
+
+                <button type="submit" class="btn-outline-sky">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/></svg>
+                  Guardar Cambios de Perfil
+                </button>
+              </form>
+            </div>
+
+            <!-- PORTAFOLIO Y HISTORIAL DE CONTRIBUCIONES -->
+            <div style="margin-top: 3rem; border-top: 1.5px solid var(--sky-200); padding-top: 1.5rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h4 style="color: var(--sky-900); font-size: 1.25rem; font-weight: 800;">Historial de Contribuciones del Autor</h4>
+                <span class="nav-badge-pill" id="author-contributions-count">0 notas publicadas</span>
+              </div>
+              <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 0.25rem;">
+                Portafolio público dinámico con todos los artículos redactados y videos producidos por este perfil.
+              </p>
+
+              <div class="profile-contributions-grid" id="profile-contributions-container">
+                <!-- Se llena dinámicamente -->
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 3: PANEL ESPECIAL DE SUPER ADMINISTRADOR (SOLO 62754739@alumnos.innovaschools.edu.pe) -->
+          <div id="view-superadmin" style="display: none;">
+            <!-- Contenedor dinámico de estado de Firebase en la Nube -->
+            <div id="superadmin-cloud-status-banner"></div>
+
+            <div class="alert-box alert-success" style="margin-bottom: 1.5rem;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <div>
+                <strong>Dirección General de Innova News:</strong> Acceso concedido exclusivamente al correo institucional de la Dirección (<strong>62754739@alumnos.innovaschools.edu.pe</strong>). Desde aquí controlas las aprobaciones de postulantes y las fotografías oficiales de la sección Sobre Nosotros.
+              </div>
+            </div>
+
+            <!-- MÓDULO: GESTIÓN DE FOTOGRAFÍAS DE "SOBRE NOSOTROS" -->
+            <div class="about-photos-manage-card">
+              <div style="display: flex; align-items: center; gap: 0.65rem; margin-bottom: 0.5rem;">
+                <span style="background: var(--sky-100); color: var(--sky-700); padding: 0.35rem 0.65rem; border-radius: var(--radius-sm); font-size: 1.1rem;">📷</span>
+                <div>
+                  <h4 style="color: var(--sky-900); font-size: 1.15rem; font-weight: 800; margin: 0;">Fotografías Oficiales de "Sobre Nosotros"</h4>
+                  <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Pega aquí las URLs de las fotos del comité para actualizar en tiempo real las imágenes visibles para los lectores.</p>
+                </div>
+              </div>
+
+              <form id="form-about-photos">
+                <div class="about-photos-grid-inputs">
+                  
+                  <!-- Foto 1: Comité de Redacción -->
+                  <div class="photo-input-item">
+                    <img id="preview-about-redaccion" class="photo-preview-thumbnail" src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=700&q=80" alt="Preview Redacción" />
+                    <label class="form-label" for="about-url-redaccion">1. Foto Comité de Redacción</label>
+                    <input type="url" id="about-url-redaccion" class="form-input" placeholder="https://ejemplo.com/foto-redaccion.jpg" required />
+                    <span class="form-help-text">Visible en la tarjeta de Redacción Escrita.</span>
+                  </div>
+
+                  <!-- Foto 2: Comité Audiovisual -->
+                  <div class="photo-input-item">
+                    <img id="preview-about-audiovisual" class="photo-preview-thumbnail" src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=700&q=80" alt="Preview Audiovisual" />
+                    <label class="form-label" for="about-url-audiovisual">2. Foto Comité Audiovisual</label>
+                    <input type="url" id="about-url-audiovisual" class="form-input" placeholder="https://ejemplo.com/foto-audiovisual.jpg" required />
+                    <span class="form-help-text">Visible en la tarjeta de Producción & Canva.</span>
+                  </div>
+
+                  <!-- Foto 3: Equipo Completo -->
+                  <div class="photo-input-item">
+                    <img id="preview-about-equipo" class="photo-preview-thumbnail" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=700&q=80" alt="Preview Equipo" />
+                    <label class="form-label" for="about-url-equipo">3. Foto del Equipo Completo</label>
+                    <input type="url" id="about-url-equipo" class="form-input" placeholder="https://ejemplo.com/foto-equipo.jpg" required />
+                    <span class="form-help-text">Visible en la tarjeta de Equipo General y Dirección.</span>
+                  </div>
+
+                </div>
+
+                <button type="submit" class="btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                  Guardar y Actualizar Fotos en la Web
+                </button>
+              </form>
+            </div>
+
+            <!-- SECCIÓN: APROBACIONES DE USUARIOS PENDIENTES -->
+            <h4 style="margin-bottom: 0.5rem; color: var(--sky-900);">Aprobaciones: Postulantes Pendientes</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+              Lista de compañeros que se registraron con la llave del comité y enviaron el correo pre-redactado. Sus cuentas están en <code>PENDIENTE_DE_APROBACION</code> y no pueden publicar. Haz clic en <strong>"ADMITIR"</strong> para activar sus formularios de publicación.
+            </p>
+
+            <div style="overflow-x: auto; background: var(--table-bg); border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+              <table class="pending-table">
+                <thead>
+                  <tr>
+                    <th>Fecha Solicitud</th>
+                    <th>Nombres y Apellidos</th>
+                    <th>Correo Institucional</th>
+                    <th>Grado y Comité</th>
+                    <th>Estado Actual</th>
+                    <th>Acción</th>
+                  </tr>
+                </thead>
+                <tbody id="superadmin-pending-tbody">
+                  <!-- Llenado dinámico -->
+                </tbody>
+              </table>
+            </div>
+
+            <h4 style="margin-top: 2.5rem; margin-bottom: 0.5rem; color: var(--green-800);">Miembros Oficialmente Admitidos</h4>
+            <div style="overflow-x: auto; background: var(--table-bg); border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+              <table class="pending-table">
+                <thead>
+                  <tr>
+                    <th>Miembro</th>
+                    <th>Correo</th>
+                    <th>Rol Oficial</th>
+                    <th>Estado</th>
+                    <th>Gestión</th>
+                  </tr>
+                </thead>
+                <tbody id="superadmin-approved-tbody">
+                  <!-- Llenado dinámico -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- SECCIÓN EXCLUSIVA: CONTROL DE EDICIONES Y ELIMINACIÓN DE NOTAS EN LA NUBE -->
+            <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px dashed var(--border-color);">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
+                <div>
+                  <h4 style="margin: 0; color: #c2410c; display: flex; align-items: center; gap: 0.5rem;">
+                    <span>🗑️</span> Control de Publicaciones y Eliminación de Notas en la Nube
+                  </h4>
+                  <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0.25rem 0 0 0;">
+                    Como directores del comité (62754739 y 76119235), pueden eliminar cualquier artículo o reportaje. Al presionar el botón naranja, se borrará de la nube central en tiempo real.
+                  </p>
+                </div>
+                <span class="badge-counter" id="total-publications-counter">0 notas</span>
+              </div>
+
+              <div style="overflow-x: auto; background: var(--table-bg); border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+                <table class="pending-table">
+                  <thead>
+                    <tr>
+                      <th>Tipo & Mes</th>
+                      <th>Título de la Noticia / Reportaje</th>
+                      <th>Autor(es)</th>
+                      <th>Fecha</th>
+                      <th style="text-align: right;">Eliminar</th>
+                    </tr>
+                  </thead>
+                  <tbody id="superadmin-publications-tbody">
+                    <!-- Llenado dinámico con botón naranja -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. MODAL DIRECTORIO DEL COMITÉ PERIODÍSTICO ("VER COMITÉ") -->
+    <div class="modal-backdrop" id="committee-modal">
+      <div class="committee-modal-card">
+        <div class="committee-modal-header">
+          <div class="committee-modal-title-group">
+            <div style="display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;">
+              <span style="background: rgba(255,255,255,0.2); padding: 0.35rem 0.65rem; border-radius: var(--radius-sm); font-size: 1.15rem;">👥</span>
+              <h3 style="margin: 0; font-size: 1.4rem; color: #ffffff;">Comité Periodístico Escolar</h3>
+              <span class="badge-counter" id="committee-members-counter" style="background: #ffffff; color: var(--sky-900); font-weight: 800;">0 miembros</span>
+            </div>
+            <p style="margin: 0.35rem 0 0 0; color: rgba(255,255,255,0.9); font-size: 0.88rem;">
+              Directorio oficial en tiempo real de directores, redactores, editores audiovisuales y reporteros escolares admitidos de Innova Schools - Sede Canta Callao (2026).
+            </p>
+          </div>
+          <button id="btn-close-committee-modal" class="committee-modal-close" aria-label="Cerrar directorio">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+
+        <!-- Barra de filtro / búsqueda rápida dentro del directorio -->
+        <div class="committee-modal-filter-bar">
+          <div class="committee-search-input-wrap">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="committee-search-input" placeholder="Buscar compañero por nombre, cargo o grado escolar..." />
+          </div>
+        </div>
+
+        <div class="committee-modal-body">
+          <div class="committee-directory-grid" id="committee-directory-grid">
+            <!-- Se llena dinámicamente con usuarios admitidos -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTENEDOR DE NOTIFICACIONES TOAST -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- SCRIPT PRINCIPAL JAVASCRIPT (COMPILACIÓN VITE / GITHUB PAGES) -->
+    <script type="module" src="./src/main.tsx"></script>
+  </body>
+</html>

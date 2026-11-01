@@ -1,0 +1,8 @@
+{
+  "name": "Innova News - Sede Canta Callao",
+  "description": "Plataforma oficial del Comité Periodístico Innova News de Innova Schools - Sede Canta Callao. Ediciones mensuales, redacción, audiovisual y portal de equipo.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
