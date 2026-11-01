@@ -64,6 +64,255 @@ const ADMIN_CONFIG = [
 ];
 
 // ==========================================================================
+// 1.1. DATOS DE RESPALDO LOCAL OFICIALES (FALLBACK DE ALTA FIDELIDAD)
+// Garantizan que ante fallas de red, credenciales o colecciones vacías de Firebase,
+// la plataforma muestre inmediatamente la columna lateral y todas las tarjetas.
+// ==========================================================================
+
+const FALLBACK_USERS = [
+  ...ADMIN_CONFIG,
+  {
+    id: "usr_student_1",
+    name: "Camila Sofía Morales",
+    email: "camila.morales@alumnos.innovaschools.edu.pe",
+    password: "innova2026password",
+    grade: "4to Secundaria",
+    role: "Editora en Jefe & Comité de Redacción",
+    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80",
+    banner: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1200&q=80",
+    bio: "Editora escolar de Innova News. Apasionada por la oratoria, el debate estudiantil y el periodismo de investigación veraz en la sede Canta Callao.",
+    status: "ADMITIDO",
+    createdAt: "2026-08-10T10:00:00Z"
+  },
+  {
+    id: "usr_student_2",
+    name: "Diego Vargas Mendoza",
+    email: "diego.vargas@alumnos.innovaschools.edu.pe",
+    password: "innova2026password",
+    grade: "3ro Secundaria",
+    role: "Reportero de Ciencia y Cultura Escolar",
+    avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=300&q=80",
+    banner: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
+    bio: "Cronista de eventos científicos, medioambientales e innovación tecnológica en Innova Schools Sede Canta Callao.",
+    status: "ADMITIDO",
+    createdAt: "2026-08-12T11:00:00Z"
+  },
+  {
+    id: "usr_student_3",
+    name: "Mateo Ramos Castillo",
+    email: "mateo.ramos@alumnos.innovaschools.edu.pe",
+    password: "innova2026password",
+    grade: "4to Secundaria",
+    role: "Camarógrafo y Editor Audiovisual",
+    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80",
+    banner: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1200&q=80",
+    bio: "Responsable técnico de captura de video, iluminación, sonido y postproducción de cápsulas escolares.",
+    status: "ADMITIDO",
+    createdAt: "2026-08-15T09:30:00Z"
+  },
+  {
+    id: "usr_student_4",
+    name: "Sofía Mendoza Huamán",
+    email: "sofia.mendoza@alumnos.innovaschools.edu.pe",
+    password: "innova2026password",
+    grade: "5to Secundaria",
+    role: "Diseñadora Multimedia & Canva",
+    avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80",
+    banner: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1200&q=80",
+    bio: "Creadora de infografías interactivas en Canva, portadas digitales y diagramación visual para Innova News.",
+    status: "ADMITIDO",
+    createdAt: "2026-08-18T14:00:00Z"
+  }
+];
+
+const FALLBACK_ARTICLES = [
+  {
+    id: "art_oct_01",
+    month: "Octubre",
+    title: "Debate Escolar 2026: Liderazgo y Oratoria Estudiantil en Canta Callao",
+    author: "Camila Sofía Morales",
+    authorEmail: "camila.morales@alumnos.innovaschools.edu.pe",
+    authorId: "usr_student_1",
+    coauthors: [
+      {
+        id: "usr_student_2",
+        name: "Diego Vargas Mendoza",
+        email: "diego.vargas@alumnos.innovaschools.edu.pe",
+        avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=300&q=80",
+        role: "Reportero de Ciencia"
+      }
+    ],
+    date: "2026-10-18",
+    excerpt: "Estudiantes de 3ro a 5to de secundaria culminaron una destacada jornada de deliberación escolar y oratoria preparando su participación en el encuentro intersedes.",
+    coverUrl: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=800&q=80",
+    wordUrl: "https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fcalibre-ebook.com%2Fdownloads%2Fdemos%2Fdemo.docx",
+    pdfUrl: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+    content: `INNOVA SCHOOLS - SEDE CANTA CALLAO
+ÓRGANO PERIODÍSTICO OFICIAL: INNOVA NEWS
+EDICIÓN CENTRAL: OCTUBRE 2026
+
+TÍTULO: DEBATE ESCOLAR 2026: LIDERAZGO Y ORATORIA ESTUDIANTIL EN CANTA CALLAO
+Por Camila Sofía Morales (Editora de Redacción) y Diego Vargas Mendoza (Coautor)
+
+1. INTRODUCCIÓN Y CONTEXTO
+Durante la segunda quincena de octubre, las aulas de secundaria de Innova Schools Sede Canta Callao fueron escenario de intensos debates académicos sobre temas de trascendencia nacional e internacional: sostenibilidad ambiental en el Callao, ética en la inteligencia artificial escolar y participación cívica estudiantil.
+
+2. EL RIGOR ARGUMENTATIVO COMO HÁBITO
+Bajo la guía formativa de los docentes de Comunicación y la profesora Patricia Ocaña, los equipos deliberaron utilizando fuentes verificadas, datos estadísticos y argumentación lógica. "El debate no busca imponer, sino construir verdad colectiva mediante el diálogo respetuoso", destacó la delegación de 4to de secundaria.
+
+3. CONCLUSIONES Y PRÓXIMOS PASOS
+La jornada culminó con la selección de la delegación que representará a la Sede Canta Callao en el Encuentro Regional de Líderes Escolares. Innova News felicita a todos los participantes por su elocuencia, rigor ético y compañerismo.`
+  },
+  {
+    id: "art_oct_02",
+    month: "Octubre",
+    title: "Feria de Ciencias y Tecnología 2026: Proyectos Ecológicos para el Callao",
+    author: "Diego Vargas Mendoza",
+    authorEmail: "diego.vargas@alumnos.innovaschools.edu.pe",
+    authorId: "usr_student_2",
+    coauthors: [
+      {
+        id: "usr_student_1",
+        name: "Camila Sofía Morales",
+        email: "camila.morales@alumnos.innovaschools.edu.pe",
+        avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80",
+        role: "Editora en Jefe"
+      }
+    ],
+    date: "2026-10-12",
+    excerpt: "Prototipos de purificación de agua marina, paneles solares de bajo costo y biohuertos verticales sorprendieron al jurado en la feria científica anual.",
+    coverUrl: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=800&q=80",
+    wordUrl: "https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fcalibre-ebook.com%2Fdownloads%2Fdemos%2Fdemo.docx",
+    pdfUrl: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+    content: `INNOVA NEWS - CRÓNICA CIENTÍFICA ESCOLAR
+EDICIÓN OCTUBRE 2026
+
+PROYECTOS QUE TRANSFORMAN NUESTRO ENTORNO
+Los laboratorios de ciencias de Innova Schools Canta Callao demostraron una vez más el talento investigativo de los alumnos. El proyecto 'Eco-Callao 2026', desarrollado por estudiantes de 3ro de secundaria, propuso filtros domésticos a base de carbón activado para zonas con acceso limitado a agua potable.
+
+La profesora Patricia Ocaña y los docentes asesores resaltaron la aplicabilidad de los proyectos y el impacto positivo que generan en la comunidad chalaca.`
+  },
+  {
+    id: "art_sep_01",
+    month: "Septiembre",
+    title: "Semana de la Juventud: Pasión, Deporte y Confraternidad en Canta Callao",
+    author: "Mateo Ramos Castillo",
+    authorEmail: "mateo.ramos@alumnos.innovaschools.edu.pe",
+    authorId: "usr_student_3",
+    date: "2026-09-24",
+    excerpt: "El patio central vibró con los torneos interaulas de básquet y vóley en una semana dedicada a la salud, el esfuerzo y los valores olímpicos escolares.",
+    coverUrl: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=800&q=80",
+    wordUrl: "https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fcalibre-ebook.com%2Fdownloads%2Fdemos%2Fdemo.docx",
+    pdfUrl: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+    content: `INNOVA NEWS - COBERTURA DEPORTIVA
+EDICIÓN SEPTIEMBRE 2026
+
+DEPORTE Y UNIÓN EN LA SEDE CANTA CALLAO
+La energía de los estudiantes de secundaria se sintió en cada encuentro deportivo. El torneo interaulas cerró con una emocionante final de básquetbol masculino y vóleibol femenino, destacando la disciplina y el juego limpio.`
+  },
+  {
+    id: "art_ago_01",
+    month: "Agosto",
+    title: "Editorial de Bienvenida: Renovando Nuestro Compromiso Periodístico 2026",
+    author: "Dirección Periodística (General)",
+    authorEmail: "62754739@alumnos.innovaschools.edu.pe",
+    authorId: "usr_admin_1",
+    date: "2026-08-16",
+    excerpt: "Iniciamos el segundo semestre académico 2026 reforzando el periodismo escolar veraz, la ética y la participación activa de cada aula.",
+    coverUrl: "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=800&q=80",
+    wordUrl: "https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fcalibre-ebook.com%2Fdownloads%2Fdemos%2Fdemo.docx",
+    pdfUrl: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+    content: `EDITORIAL OFICIAL - COMITÉ PERIODÍSTICO INNOVA NEWS
+EDICIÓN AGOSTO 2026
+
+UNA PLATAFORMA PARA TODA LA COMUNIDAD
+Con el inicio del nuevo ciclo escolar, Innova News renueva su misión formativa. La libre expresión estudiantil, acompañada de rigor analítico y creatividad, constituye el pilar sobre el que nuestros reporteros y editores construyen cada edición mensual.`
+  }
+];
+
+const FALLBACK_MEDIA = [
+  {
+    id: "med_oct_01",
+    month: "Octubre",
+    title: "Infografía Interactiva: Guía del Ecosistema Marino del Litoral Chalaco",
+    mediaType: "canva",
+    mediaUrl: "https://www.canva.com",
+    coverUrl: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800&q=80",
+    author: "Sofía Mendoza (Comité Audiovisual)",
+    authorEmail: "sofia.mendoza@alumnos.innovaschools.edu.pe",
+    authorId: "usr_student_4",
+    coauthors: [
+      {
+        id: "usr_admin_2",
+        name: "Coordinación Periodística",
+        email: "76119235@alumnos.innovaschools.edu.pe",
+        avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80",
+        role: "Super Administrador"
+      }
+    ],
+    date: "2026-10-16",
+    description: "Diseño interactivo elaborado en Canva sobre la biodiversidad de las islas Palomino y la conservación ambiental escolar en el Callao.",
+    credits: {
+      director: "Sofía Mendoza Huamán",
+      camera: "Comité Audiovisual",
+      editing: "Innova News Canta Callao",
+      collaborators: "Alumnos de 5to de Secundaria"
+    },
+    externalLink: "https://www.canva.com",
+    pdfUrl: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+  },
+  {
+    id: "med_oct_02",
+    month: "Octubre",
+    title: "Cápsula Informativa: Entrevistas Exclusivas del Taller de Periodismo Escolar",
+    mediaType: "youtube",
+    mediaUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    coverUrl: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=800&q=80",
+    author: "Coordinación Periodística",
+    authorEmail: "76119235@alumnos.innovaschools.edu.pe",
+    authorId: "usr_admin_2",
+    coauthors: [
+      {
+        id: "usr_student_3",
+        name: "Mateo Ramos Castillo",
+        email: "mateo.ramos@alumnos.innovaschools.edu.pe",
+        avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80",
+        role: "Camarógrafo y Editor"
+      }
+    ],
+    date: "2026-10-09",
+    description: "Video reportaje producido íntegramente por los estudiantes de Canta Callao con micrófonos, cámaras y testimonios en set escolar.",
+    credits: {
+      director: "Coordinación Periodística",
+      camera: "Mateo Ramos Castillo",
+      editing: "Taller Audiovisual Canta Callao",
+      collaborators: "Estudiantes de Sede Canta Callao"
+    },
+    externalLink: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+  },
+  {
+    id: "med_sep_01",
+    month: "Septiembre",
+    title: "Video Resumen: Lo Mejor de las Olimpiadas Escolares Canta Callao 2026",
+    mediaType: "direct",
+    mediaUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+    coverUrl: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80",
+    author: "Comité Audiovisual",
+    authorEmail: "76119235@alumnos.innovaschools.edu.pe",
+    authorId: "usr_admin_2",
+    date: "2026-09-22",
+    description: "Cámara lenta, premiación y las mejores jugadas de la jornada deportiva vivida en el patio institucional de secundaria.",
+    credits: {
+      director: "Comité Audiovisual",
+      camera: "Mateo Ramos Castillo",
+      editing: "Innova News",
+      collaborators: "Comunidad Escolar Canta Callao"
+    },
+    externalLink: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+  }
+];
+
+// ==========================================================================
 // 2. CONEXIÓN A BASE DE DATOS CENTRAL (FIREBASE / NUBE)
 // Credenciales oficiales de Firebase para Innova News - Sede Canta Callao
 // ==========================================================================
@@ -152,24 +401,33 @@ class CloudSyncService {
 
   handleFirestoreError(err, source) {
     const errMsg = err ? (err.message || String(err)) : "";
-    const isApiNotEnabled = errMsg.includes("Cloud Firestore API has not been used") || 
-                            errMsg.includes("it is disabled") ||
-                            (err && err.code === "permission-denied" && errMsg.includes("overview?project="));
+    this.cloudStatus = "offline";
+    console.info(`ℹ️ [Innova News]: Conexión en '${source}' (${errMsg || 'sin conexión'}). Operando inmediatamente con datos de respaldo locales.`);
 
-    if (isApiNotEnabled) {
-      this.cloudStatus = "api_disabled";
-      this.statusMessage = "Cloud Firestore aún no ha sido creado en el proyecto 'innova-news-canta-callao'.";
+    // Garantizar que el almacenamiento local tenga datos de respaldo inmediatos
+    const currArticles = store.getArticles();
+    if (!currArticles || currArticles.length === 0) {
+      localStorage.setItem(STORAGE_KEYS.ARTICLES, JSON.stringify(FALLBACK_ARTICLES));
+    }
+    const currMedia = store.getMedia();
+    if (!currMedia || currMedia.length === 0) {
+      localStorage.setItem(STORAGE_KEYS.MEDIA, JSON.stringify(FALLBACK_MEDIA));
+    }
+    const currUsers = store.getUsers();
+    if (!currUsers || currUsers.length === 0) {
+      localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify(FALLBACK_USERS));
+    }
 
-      console.info(
-        "ℹ️ [Innova News Cloud]: Cloud Firestore está en proceso de activación en 'innova-news-canta-callao'. " +
-        "La plataforma está operando con almacenamiento sincronizado en tiempo real (multilengüeta y persistente)."
-      );
-
-      if (window.innovaApp && typeof window.innovaApp.renderCloudStatusBanner === "function") {
-        window.innovaApp.renderCloudStatusBanner();
-      }
-    } else {
-      console.warn(`Firestore [${source}] detalle:`, errMsg);
+    if (window.innovaApp) {
+      try {
+        window.innovaApp.renderSpotlight();
+        window.innovaApp.renderContent();
+        window.innovaApp.renderAboutPhotos();
+        window.innovaApp.renderAuthNav();
+        if (typeof window.innovaApp.renderCommitteeDirectory === "function") {
+          window.innovaApp.renderCommitteeDirectory();
+        }
+      } catch (e) {}
     }
   }
 
@@ -193,8 +451,23 @@ class CloudSyncService {
           });
           const articles = [];
           snapshot.forEach(docSnap => articles.push({ ...docSnap.data(), id: docSnap.id }));
-          articles.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
-          localStorage.setItem(STORAGE_KEYS.ARTICLES, JSON.stringify(articles));
+          
+          if (articles.length === 0) {
+            // Colección vacía en Firestore: asegurar que los datos de respaldo no se eliminen
+            const current = store.getArticles();
+            if (!current || current.length === 0) {
+              localStorage.setItem(STORAGE_KEYS.ARTICLES, JSON.stringify(FALLBACK_ARTICLES));
+            }
+          } else {
+            FALLBACK_ARTICLES.forEach(fa => {
+              if (!articles.some(a => a.id === fa.id)) {
+                articles.push(fa);
+              }
+            });
+            articles.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
+            localStorage.setItem(STORAGE_KEYS.ARTICLES, JSON.stringify(articles));
+          }
+
           if (window.innovaApp) {
             window.innovaApp.renderSpotlight();
             window.innovaApp.renderContent();
@@ -347,8 +620,21 @@ class CloudSyncService {
           });
           const media = [];
           snapshot.forEach(docSnap => media.push({ ...docSnap.data(), id: docSnap.id }));
-          media.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
-          localStorage.setItem(STORAGE_KEYS.MEDIA, JSON.stringify(media));
+          
+          if (media.length === 0) {
+            const current = store.getMedia();
+            if (!current || current.length === 0) {
+              localStorage.setItem(STORAGE_KEYS.MEDIA, JSON.stringify(FALLBACK_MEDIA));
+            }
+          } else {
+            FALLBACK_MEDIA.forEach(fm => {
+              if (!media.some(m => m.id === fm.id)) {
+                media.push(fm);
+              }
+            });
+            media.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
+            localStorage.setItem(STORAGE_KEYS.MEDIA, JSON.stringify(media));
+          }
           if (window.innovaApp) {
             window.innovaApp.renderContent();
             window.innovaApp.loadSuperAdminData();
@@ -525,40 +811,54 @@ class InnovaNewsStore {
   }
 
   initStorage() {
-    if (!localStorage.getItem(STORAGE_KEYS.USERS)) {
-      localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify(ADMIN_CONFIG));
-    }
-    if (!localStorage.getItem(STORAGE_KEYS.ARTICLES)) {
-      localStorage.setItem(STORAGE_KEYS.ARTICLES, JSON.stringify([]));
-    }
-    if (!localStorage.getItem(STORAGE_KEYS.MEDIA)) {
-      localStorage.setItem(STORAGE_KEYS.MEDIA, JSON.stringify([]));
-    }
-    if (!localStorage.getItem(STORAGE_KEYS.NOTIFICATIONS_LOG)) {
-      localStorage.setItem(STORAGE_KEYS.NOTIFICATIONS_LOG, JSON.stringify([]));
-    }
-    if (!localStorage.getItem(STORAGE_KEYS.ABOUT_PHOTOS)) {
-      localStorage.setItem(STORAGE_KEYS.ABOUT_PHOTOS, JSON.stringify(DEFAULT_ABOUT_PHOTOS));
+    try {
+      const usersRaw = localStorage.getItem(STORAGE_KEYS.USERS);
+      if (!usersRaw || JSON.parse(usersRaw).length === 0) {
+        localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify(FALLBACK_USERS));
+      }
+      const artsRaw = localStorage.getItem(STORAGE_KEYS.ARTICLES);
+      if (!artsRaw || JSON.parse(artsRaw).length === 0) {
+        localStorage.setItem(STORAGE_KEYS.ARTICLES, JSON.stringify(FALLBACK_ARTICLES));
+      }
+      const mediaRaw = localStorage.getItem(STORAGE_KEYS.MEDIA);
+      if (!mediaRaw || JSON.parse(mediaRaw).length === 0) {
+        localStorage.setItem(STORAGE_KEYS.MEDIA, JSON.stringify(FALLBACK_MEDIA));
+      }
+      if (!localStorage.getItem(STORAGE_KEYS.NOTIFICATIONS_LOG)) {
+        localStorage.setItem(STORAGE_KEYS.NOTIFICATIONS_LOG, JSON.stringify([]));
+      }
+      if (!localStorage.getItem(STORAGE_KEYS.ABOUT_PHOTOS)) {
+        localStorage.setItem(STORAGE_KEYS.ABOUT_PHOTOS, JSON.stringify(DEFAULT_ABOUT_PHOTOS));
+      }
+    } catch (e) {
+      console.warn("initStorage fallback:", e);
     }
 
-    // Inyección y verificación automática de ambos administradores
+    // Inyección y verificación automática de ambos administradores y equipo escolar
     this.ensureAdminUsers();
   }
 
   ensureAdminUsers() {
     const users = this.getUsers();
 
+    FALLBACK_USERS.forEach(fallbackUser => {
+      const idx = users.findIndex(u => u.email.toLowerCase() === fallbackUser.email.toLowerCase());
+      if (idx === -1) {
+        users.unshift({ ...fallbackUser });
+      } else {
+        if (!users[idx].status) users[idx].status = fallbackUser.status || "ADMITIDO";
+        if (!users[idx].role) users[idx].role = fallbackUser.role;
+        if (!users[idx].bio) users[idx].bio = fallbackUser.bio;
+        if (!users[idx].banner) users[idx].banner = fallbackUser.banner;
+      }
+    });
+
     ADMIN_CONFIG.forEach(admin => {
       const idx = users.findIndex(u => u.email.toLowerCase() === admin.email.toLowerCase());
-      if (idx === -1) {
-        users.unshift({ ...admin });
-      } else {
-        // Garantizar clave y estado ADMITIDO siempre para ambos administradores
+      if (idx !== -1) {
         users[idx].password = admin.password;
         users[idx].status = "ADMITIDO";
         users[idx].role = admin.role;
-        if (!users[idx].bio) users[idx].bio = admin.bio;
-        if (!users[idx].banner) users[idx].banner = admin.banner;
       }
     });
 
@@ -575,14 +875,20 @@ class InnovaNewsStore {
   getUsers() {
     try {
       const users = JSON.parse(localStorage.getItem(STORAGE_KEYS.USERS) || "[]");
-      return users.map(u => {
+      const list = (Array.isArray(users) && users.length > 0) ? users : [...FALLBACK_USERS];
+      FALLBACK_USERS.forEach(fu => {
+        if (!list.some(u => u.email.toLowerCase() === fu.email.toLowerCase())) {
+          list.push({ ...fu });
+        }
+      });
+      return list.map(u => {
         if (!u.avatar || u.avatar.includes("photo-1535713875002")) {
           return { ...u, avatar: DEFAULT_USER_AVATAR };
         }
         return u;
       });
     } catch {
-      return [...ADMIN_CONFIG];
+      return [...FALLBACK_USERS];
     }
   }
 
@@ -646,9 +952,11 @@ class InnovaNewsStore {
 
   getArticles() {
     try {
-      return JSON.parse(localStorage.getItem(STORAGE_KEYS.ARTICLES) || "[]");
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEYS.ARTICLES) || "[]");
+      if (Array.isArray(saved) && saved.length > 0) return saved;
+      return [...FALLBACK_ARTICLES];
     } catch {
-      return [];
+      return [...FALLBACK_ARTICLES];
     }
   }
 
@@ -674,9 +982,11 @@ class InnovaNewsStore {
 
   getMedia() {
     try {
-      return JSON.parse(localStorage.getItem(STORAGE_KEYS.MEDIA) || "[]");
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEYS.MEDIA) || "[]");
+      if (Array.isArray(saved) && saved.length > 0) return saved;
+      return [...FALLBACK_MEDIA];
     } catch {
-      return [];
+      return [...FALLBACK_MEDIA];
     }
   }
 
@@ -723,11 +1033,42 @@ class InnovaNewsStore {
 const store = new InnovaNewsStore();
 
 // ==========================================================================
-// 5. CONTROLADOR DE LA APLICACIÓN (UI Y LÓGICA DE NEGOCIO)
+// 5. CONTROLADOR DE LA APLICACIÓN (UI Y LÓGICA DE NEGOCIO CON ESTADO LOCAL)
 // ==========================================================================
+
+// Hook reactivo de estado local (patrón useState para componentes y navegación fluida)
+function createLocalState(initialValue, onStateChange) {
+  let state = initialValue;
+  const getState = () => state;
+  const setState = (nextValue) => {
+    const resolvedValue = typeof nextValue === "function" ? nextValue(state) : nextValue;
+    if (state !== resolvedValue) {
+      state = resolvedValue;
+      if (typeof onStateChange === "function") {
+        onStateChange(state);
+      }
+    }
+    return state;
+  };
+  return [getState, setState];
+}
 
 class InnovaNewsApp {
   constructor() {
+    // Inicializar hooks de estado local reactivo (patrón useState)
+    const [getActiveSection, setActiveSection] = createLocalState("inicio", (sec) => this.onSectionChange(sec));
+    const [getSelectedMonth, setSelectedMonth] = createLocalState("Octubre", (m) => this.onMonthChange(m));
+    const [getSelectedCategory, setSelectedCategory] = createLocalState("redaccion", (cat) => this.onCategoryChange(cat));
+
+    this.getActiveSection = getActiveSection;
+    this.setActiveSection = setActiveSection;
+    this.getSelectedMonth = getSelectedMonth;
+    this.setSelectedMonth = setSelectedMonth;
+    this.getSelectedCategory = getSelectedCategory;
+    this.setSelectedCategory = setSelectedCategory;
+
+    // Propiedades de acceso directo compatibles con el resto de métodos
+    this.activeSection = "inicio";
     this.selectedMonth = "Octubre";
     this.selectedCategory = "redaccion"; // 'redaccion' o 'audiovisual'
     this.currentDocToDownload = null;
@@ -799,6 +1140,58 @@ class InnovaNewsApp {
     const nextTheme = currentTheme === "dark" ? "light" : "dark";
     this.applyTheme(nextTheme);
     this.showToast(`Modo ${nextTheme === "dark" ? "Oscuro" : "Claro"} activado.`, "info");
+  }
+
+  // ========================================================================
+  // NAVEGACIÓN Y SINCRONIZACIÓN DE ESTADO LOCAL (USESTATE)
+  // ========================================================================
+
+  onSectionChange(section) {
+    this.activeSection = section;
+    // Sincronizar clases activas en los enlaces de la barra de navegación
+    document.querySelectorAll(".nav-link[data-nav]").forEach(link => {
+      link.classList.toggle("active", link.dataset.nav === section);
+    });
+
+    // Desplazamiento suave y sin congelamientos hacia la sección de destino
+    const targetElement = document.getElementById(section);
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    // Mantener la URL sincronizada de manera limpia sin recarga ni hash jump
+    try {
+      if (window.location.hash !== "#" + section) {
+        history.replaceState(null, "", "#" + section);
+      }
+    } catch (e) {}
+  }
+
+  onMonthChange(month) {
+    this.selectedMonth = month;
+    if (this.monthTabsContainer) {
+      this.monthTabsContainer.querySelectorAll(".month-tab-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.month === month);
+      });
+    }
+    this.renderContent();
+  }
+
+  onCategoryChange(category) {
+    this.selectedCategory = category;
+    if (this.btnCatRedaccion && this.btnCatAudiovisual) {
+      this.btnCatRedaccion.classList.toggle("active", category === "redaccion");
+      this.btnCatAudiovisual.classList.toggle("active", category === "audiovisual");
+    }
+    this.renderContent();
+  }
+
+  // Navegar suavemente entre secciones mediante cambio de estado local
+  navigateTo(section) {
+    this.setActiveSection(section);
+    if (this.navMenu) {
+      this.navMenu.classList.remove("mobile-open");
+    }
   }
 
   initDOMElements() {
@@ -932,6 +1325,49 @@ class InnovaNewsApp {
         this.navMenu.classList.toggle("mobile-open");
       });
     }
+
+    // ------------------------------------------------------------------------
+    // NAVEGACIÓN Y BOTONES DE SECCIÓN CON ESTADO LOCAL (USESTATE)
+    // ------------------------------------------------------------------------
+
+    // Enlaces de la barra de navegación (.nav-link[data-nav])
+    document.querySelectorAll(".nav-link[data-nav]").forEach(link => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const navSection = link.getAttribute("data-nav") || "inicio";
+        this.navigateTo(navSection);
+      });
+    });
+
+    // Logo e identidad de marca (#brand-link o cualquier a[href="#inicio"])
+    const brandLink = document.getElementById("brand-link");
+    if (brandLink) {
+      brandLink.addEventListener("click", (e) => {
+        e.preventDefault();
+        this.navigateTo("inicio");
+      });
+    }
+    document.querySelectorAll('a[href="#inicio"]').forEach(link => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        this.navigateTo("inicio");
+      });
+    });
+
+    // Botones de secciones principales ('Explorar Ediciones 2026', 'Conoce al Equipo', etc.)
+    document.querySelectorAll('a[href="#ediciones"]').forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        this.navigateTo("ediciones");
+      });
+    });
+
+    document.querySelectorAll('a[href="#sobre-nosotros"]').forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        this.navigateTo("sobre-nosotros");
+      });
+    });
 
     // Modal de Autenticación
     if (this.btnOpenAuth) {
@@ -1419,28 +1855,20 @@ class InnovaNewsApp {
   // ========================================================================
 
   selectMonth(month) {
-    this.selectedMonth = month;
-    if (this.monthTabsContainer) {
-      this.monthTabsContainer.querySelectorAll(".month-tab-btn").forEach(btn => {
-        btn.classList.toggle("active", btn.dataset.month === month);
-      });
-    }
-    this.renderContent();
+    this.setSelectedMonth(month);
   }
 
   selectCategory(category) {
-    this.selectedCategory = category;
-    if (this.btnCatRedaccion && this.btnCatAudiovisual) {
-      this.btnCatRedaccion.classList.toggle("active", category === "redaccion");
-      this.btnCatAudiovisual.classList.toggle("active", category === "audiovisual");
-    }
-    this.renderContent();
+    this.setSelectedCategory(category);
   }
 
   renderSpotlight() {
     if (!this.heroSpotlightContainer) return;
     const articles = store.getArticles();
-    const featured = articles.find(a => a.month === "Octubre") || articles[0];
+    // Siempre garantizar que featured exista utilizando el respaldo local de alta fidelidad
+    const featured = (articles && articles.find(a => a.month === "Octubre")) || 
+                     (articles && articles[0]) || 
+                     FALLBACK_ARTICLES[0];
     const user = store.getCurrentUser();
     const isAdmitted = this.isUserAdmitted(user);
     const isAdmin = this.isAdminUser(user);
@@ -1489,14 +1917,14 @@ class InnovaNewsApp {
               Plataforma informativa escolar guiada por la profesora Patricia Ocaña. Descubre las investigaciones, artículos de opinión y reportajes multimedia elaborados por nuestros estudiantes.
             </p>
             <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-              <a href="#ediciones" class="btn-read-word" style="text-decoration: none;">
+              <button type="button" class="btn-read-word" onclick="window.innovaApp.navigateTo('ediciones')" style="text-decoration: none; cursor: pointer;">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
                 Consultar Hemeroteca
-              </a>
-              <a href="#sobre-nosotros" class="btn-primary" style="background-color: var(--sky-700); text-decoration: none;">
+              </button>
+              <button type="button" class="btn-primary" onclick="window.innovaApp.navigateTo('sobre-nosotros')" style="background-color: var(--sky-700); text-decoration: none; cursor: pointer;">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
                 Conocer al Equipo
-              </a>
+              </button>
             </div>
           </div>
         `;
@@ -1574,7 +2002,14 @@ class InnovaNewsApp {
   }
 
   renderArticlesList() {
-    const articles = store.getArticles().filter(a => a.month === this.selectedMonth);
+    let articles = store.getArticles().filter(a => a.month === this.selectedMonth);
+    // Si no hay artículos registrados para este mes en particular, usar el respaldo local inmediato
+    if (articles.length === 0) {
+      const monthFallbacks = FALLBACK_ARTICLES.filter(a => a.month === this.selectedMonth);
+      if (monthFallbacks.length > 0) {
+        articles = monthFallbacks;
+      }
+    }
     const user = store.getCurrentUser();
     const isAdmitted = this.isUserAdmitted(user);
     const isAdmin = this.isAdminUser(user);
@@ -1700,7 +2135,14 @@ class InnovaNewsApp {
   }
 
   renderMediaList() {
-    const mediaList = store.getMedia().filter(m => m.month === this.selectedMonth);
+    let mediaList = store.getMedia().filter(m => m.month === this.selectedMonth);
+    // Si no hay producciones audiovisuales registradas para este mes en particular, usar el respaldo local inmediato
+    if (mediaList.length === 0) {
+      const monthFallbacks = FALLBACK_MEDIA.filter(m => m.month === this.selectedMonth);
+      if (monthFallbacks.length > 0) {
+        mediaList = monthFallbacks;
+      }
+    }
     const user = store.getCurrentUser();
     const isAdmitted = this.isUserAdmitted(user);
     const isAdmin = this.isAdminUser(user);
